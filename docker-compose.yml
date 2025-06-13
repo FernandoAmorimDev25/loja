@@ -1,6 +1,6 @@
 services:
   # custom image
-  school:
+  loja:
     build:
       args:
         user: loja
