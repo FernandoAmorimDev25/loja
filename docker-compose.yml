@@ -1,0 +1,74 @@
+services:
+  # custom image
+  school:
+    build:
+      args:
+        user: loja
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: loja
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www/
+    restart: unless-stopped
+    depends_on:
+      - redis
+      - queue
+    networks:
+      - loja-conection
+  
+  #nginx
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/:/etc/nginx/conf.d/
+    networks:
+      - loja-conection
+
+  # db
+  mysql:
+    image: mysql:8.0.40
+    volumes:
+      - ./.docker/mysql:/var/lib/mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+        - "3306:3306"
+    networks:
+      - loja-conection
+  
+  # redis
+  redis:
+    image: redis:latest
+    networks:
+      - loja-conection
+
+  # queue
+  queue:
+    build:
+      args:
+        user: loja
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    command: "php artisan queue:work"
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - redis
+    networks:
+    - loja-conection
+
+networks:
+  loja-conection:
+    driver: bridge
