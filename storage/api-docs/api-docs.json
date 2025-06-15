@@ -1,0 +1,755 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de Produtos",
+        "description": "Documentação da API de Produtos usando Swagger(antes de criar os produtos a(s) categoria precisam ser criada primeiro)",
+        "contact": {
+            "email": "suporte@exemplo.com"
+        },
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost",
+            "description": "Servidor local"
+        }
+    ],
+    "paths": {
+        "/api/category": {
+            "get": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "Listar todas as categorias",
+                "description": "Retorna a lista completa de categorias",
+                "operationId": "getCategories",
+                "responses": {
+                    "200": {
+                        "description": "Lista de categorias retornada com sucesso"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "nova categoria",
+                "description": "Criação da categoria",
+                "operationId": "Criar uma nova Categoria",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Roupas"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Mostra a categoria criada com sucesso"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/category/{category}": {
+            "get": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "detalhes da categoria",
+                "description": "Detalhamento da categoria",
+                "operationId": "recuperar o categoria por id",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "ID da category (id e do tipo uuid precisa copiar o codigo id gerado na lista de categorias entre as aspas duplas e colar no campo abaixo)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostra os detalhes da categoria com sucesso"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "atualizar categoria",
+                "description": "Atualização da categoria",
+                "operationId": "Atualizar uma categoria",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "ID da category (id e do tipo uuid precisa copiar o codigo id gerado na lista de categorias entre as aspas duplas e colar no campo abaixo)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Roupas quentes"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mostra atualização da categoria com sucesso"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Categorias"
+                ],
+                "summary": "deletar categoria",
+                "description": "categoria deletada",
+                "operationId": "Deletar uma Categoria",
+                "parameters": [
+                    {
+                        "name": "category",
+                        "in": "path",
+                        "description": "ID da category (id e do tipo uuid precisa copiar o codigo id gerado na lista de categorias entre as aspas duplas e colar no campo abaixo)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostra a categoria deletada com sucesso"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "logar usúario",
+                "description": "Login do usúario",
+                "operationId": "login",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "2i2ww@google.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "T@rt@14#"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Mostra o usuário logado com sucesso"
+                    }
+                }
+            }
+        },
+        "/api/logout/{user}": {
+            "post": {
+                "tags": [
+                    "Logout"
+                ],
+                "summary": "deslogar usúario",
+                "description": "Logout do usúario",
+                "operationId": "logout",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID do usúario (id e do tipo uuid precisa copiar o codigo id gerado na lista de produtos entre as aspas duplas e colar no campo abaixo)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Mostra o usuário deslogado com sucesso"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/product": {
+            "get": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "Listar todos os produtos",
+                "description": "Retorna a lista completa de produtos",
+                "operationId": "getProducts",
+                "responses": {
+                    "200": {
+                        "description": "Lista de produtos retornada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "nome": {
+                                                "type": "string",
+                                                "example": "Camiseta"
+                                            },
+                                            "preco": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": 49.99
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "novo do produto",
+                "description": "Criação do produto",
+                "operationId": "Criar um novo Produto",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Camiseta"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descrição da camiseta"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 49.99
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "example": 10
+                                    },
+                                    "category_id": {
+                                        "type": "string",
+                                        "example": "9f2846be-da65-44f6-b453-6abdde55acb1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Mostra o produto criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "nome": {
+                                                "type": "string",
+                                                "example": "Camiseta"
+                                            },
+                                            "preco": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": 49.99
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "category_id": {
+                                                "type": "string",
+                                                "example": "9f2846be-da65-44f6-b453-6abdde55acb1"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/product/{product}": {
+            "get": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "detalhes do produto",
+                "description": "Detalhamento do produto",
+                "operationId": "recuperar o produto por id",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "ID do Produto (id e do tipo uuid precisa copiar o codigo id gerado na lista de produtos entre as aspas duplas e colar no campo abaixo)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostra o detalhe do produto com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "nome": {
+                                                "type": "string",
+                                                "example": "Camiseta"
+                                            },
+                                            "preco": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": 49.99
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "atualizar produto",
+                "description": "Atualização do produto",
+                "operationId": "Atualizar um Produto",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "ID do Produto (id e do tipo uuid precisa copiar o codigo id gerado na lista de produtos entre as aspas duplas e colar no campo abaixo)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Camiseta do guns"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Descrição da camiseta"
+                                    },
+                                    "price": {
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 49.99
+                                    },
+                                    "quantity": {
+                                        "type": "integer",
+                                        "example": 10
+                                    },
+                                    "category_id": {
+                                        "type": "string",
+                                        "example": "9f2846be-da65-44f6-b453-6abdde55acb1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mostra atualização do produto com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "nome": {
+                                                "type": "string",
+                                                "example": "Camiseta"
+                                            },
+                                            "preco": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": 49.99
+                                            },
+                                            "created_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            },
+                                            "updated_at": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Produtos"
+                ],
+                "summary": "deletar produto",
+                "description": "Ele não deleta o produto inteiro, apenas diminui quantidade e quando essa quantidade chegar a zero ele deleta o produto,\n *     o valor colocado é 1 para demonstrar o funcionamento,mas pode ser alterado dependendo do valor inserido no frontend",
+                "operationId": "Deletar um Produto",
+                "parameters": [
+                    {
+                        "name": "product",
+                        "in": "path",
+                        "description": "ID do Produto (id e do tipo uuid precisa copiar o codigo id gerado na lista de produtos entre as aspas duplas e colar no campo abaixo)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostra atualização do produto com sucesso"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "Usúarios"
+                ],
+                "summary": "Listar todos os usuários",
+                "description": "Retorna a lista completa de usúarios",
+                "operationId": "getUsers",
+                "responses": {
+                    "200": {
+                        "description": "Lista de usúarios retornada com sucesso"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Usúarios"
+                ],
+                "summary": "novo usúario",
+                "description": "Criação do usúario",
+                "operationId": "Criar um novo Usúario",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "João silva"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "2i2ww@google.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "T@rt@14#"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Mostra o usuário criado com sucesso"
+                    }
+                }
+            }
+        },
+        "/api/users/{user}": {
+            "get": {
+                "tags": [
+                    "Usúarios"
+                ],
+                "summary": "detalhes do usuário",
+                "description": "Detalhamento do usúario",
+                "operationId": "recuperar o usúario por id",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID do usúario (id e do tipo uuid e necessario copiar o codigo id gerado na lista de usúarios entre as aspas duplas e colar no campo abaixo)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostra os detalhes do usúario com sucesso"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Usúarios"
+                ],
+                "summary": "atualizar usúario",
+                "description": "Atualização do usúario",
+                "operationId": "Atualizar um usúario",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID do usúario (id e do tipo uuid e necessario copiar o codigo id gerado na lista de usúarios entre as aspas duplas e colar no campo abaixo)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "João silva souza"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "joao@google.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "T@rt@14#"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Mostra atualização do usúario com sucesso"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Usúarios"
+                ],
+                "summary": "deletar usúario",
+                "description": "categoria deletada",
+                "operationId": "Deletar um usúario",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID do usúario (id e do tipo uuid e necessario copiar o codigo id gerado na lista de usúarios entre as aspas duplas e colar no campo abaixo)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Mostra o usúario deletado com sucesso"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Categorias",
+            "description": "Categorias"
+        },
+        {
+            "name": "Login",
+            "description": "Login"
+        },
+        {
+            "name": "Logout",
+            "description": "Logout"
+        },
+        {
+            "name": "Produtos",
+            "description": "Produtos"
+        },
+        {
+            "name": "Usúarios",
+            "description": "Usúarios"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "bearer": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

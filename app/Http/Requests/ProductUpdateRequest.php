@@ -38,7 +38,7 @@ class ProductUpdateRequest extends FormRequest
             "description" => ['required', 'string', 'min:10', 'max:255'],
             "price" => ['required', 'numeric'],
             "quantity" => ['required', 'integer', 'between:1,9999'],
-            "category" => ['required', 'string', 'min:5', 'max:255'],
+            "category_id" => ['required', 'exists:categories,id'],
         ];
     }
 
@@ -59,11 +59,8 @@ class ProductUpdateRequest extends FormRequest
             'quantity.required' => 'A quantidade é obrigatória',
             'quantity.integer' => 'A quantidade deve ser um número inteiro',
             'quantity.between' => 'A quantidade deve estar entre 1 e 9999',
-            'category.required' => 'A categoria é obrigatória',
-            'category.min' => 'A categoria deve ter pelo menos 5 caracteres',
-            'category.max' => 'A categoria deve ter no máximo 255 caracteres',
-            'category.string' => 'A categoria deve conter apenas letras',
-            
+            'category_id.required' => 'A categoria é obrigatória',
+            'category_id.exists' => 'A categoria não existe',
         ];
     }
 }

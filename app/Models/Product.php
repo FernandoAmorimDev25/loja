@@ -16,6 +16,11 @@ class Product extends Model
         'description',
         'price',
         'quantity',
-        'category',
+        'category_id',
     ];
+
+    public function category()
+    {
+        return $this->HasMany(Category::class);
+    }
 }
