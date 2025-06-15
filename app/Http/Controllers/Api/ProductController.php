@@ -51,7 +51,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductRequest $request)
+    public function store(ProductRequest $request) 
     {
         try {
             
@@ -65,7 +65,7 @@ class ProductController extends Controller
 
         return response()->json([
             'status' => true,
-            'user' => $product,
+            'products' => $product,
             'message' => "Produto cadastrado com sucesso",
         ])->setStatusCode(201);
 
@@ -94,7 +94,7 @@ class ProductController extends Controller
 
         return response()->json([
             'status' => true,
-            'user' => $product,
+            'product' => $product,
             'message' => "Produto atualizado com sucesso",
         ])->setStatusCode(200);
         
@@ -109,11 +109,20 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product): JsonResponse
+    public function destroy(Product $product, $quantidadeRemovida = 1): JsonResponse
     {
         try{
+            $product->quantity -= $quantidadeRemovida;
 
-        $product->delete();
+            if ($product->quantity <= 0) 
+            {
+                $product->quantity = 0;
+                $product->delete();
+            }
+            else 
+            {
+                $product->save();
+            }
 
         return response()->json([
             'status' => true,

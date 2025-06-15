@@ -8,16 +8,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class ProductFactory extends Factory
+class CategoryFactory extends Factory
 {
     public function definition(): array
     {
         return [
             'name' => fake()->word(),
-            'description' => fake()->text(),
-            'price' => fake()->randomFloat(2, 0, 100),
-            'quantity' => fake()->randomDigit(),
-            'category' => fake()->randomElement(['Electronics', 'Clothing', 'Books', 'Toys', 'Sports']),
         ];
     }
 }
